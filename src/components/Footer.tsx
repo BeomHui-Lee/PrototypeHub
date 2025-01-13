@@ -48,7 +48,7 @@ const Footer = () => {
             <h3 className="text-xl font-bold text-white mb-4">연락하기</h3>
             <div className="space-y-2">
               <a
-                href="mailto:your.email@example.com"
+                href="mailto:huina0901@naver.com"
                 className="flex items-center space-x-2 hover:text-blue-400 transition-colors"
               >
                 <Mail size={16} />

@@ -14,7 +14,7 @@ interface Project {
   link: string;
 }
 
-const projects: Project[] = [
+const playground: Project[] = [
   {
     id: 'lottery',
     title: '추첨 시뮬레이터',
@@ -42,7 +42,7 @@ const ProjectsPage = () => {
     { id: 'experiment', name: '실험' },
   ];
 
-  const filteredProjects = projects.filter((project) => {
+  const filteredProjects = playground.filter((project) => {
     const matchesSearch =
       project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -64,7 +64,7 @@ const ProjectsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl font-bold text-gray-800 mb-4"
           >
-            프로젝트
+            플레이그라운드
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

@@ -192,21 +192,7 @@ const LotterySimulator: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 pb-8">
-      <header className="w-full bg-white shadow-md py-6 mb-8">
-        <div className="max-w-4xl mx-auto px-4 flex justify-between items-center mobile:px-2">
-          <h1 className="text-3xl font-bold text-gray-800 mobile:text-2xl">
-            추첨 시뮬레이터
-          </h1>
-          <Button
-            onClick={() => navigate('/')}
-            className="!px-4 !py-2 !text-base mobile:!px-3"
-          >
-            홈으로
-          </Button>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 pb-8 pt-24">
       <div className="w-full max-w-4xl mx-auto px-4 space-y-8 mobile:px-2">
         <Card>
           <div className="p-6 space-y-8 mobile:p-4">
