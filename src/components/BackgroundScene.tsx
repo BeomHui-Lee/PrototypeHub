@@ -116,18 +116,21 @@ const Scene = () => {
 
   useFrame((state) => {
     if (groupRef.current) {
-      // 기본 회전
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.05;
+      // 기본 회전 (sin 함수를 사용하여 -π/2에서 π/2 사이의 왕복 운동 구현)
+      const oscillation =
+        (Math.sin(state.clock.elapsedTime * 0.5) * Math.PI) / 2;
+      groupRef.current.rotation.y = oscillation;
 
-      // 마우스 위치에 따른 추가 회전
+      // 마우스 위치에 따른 추가 회전 (각도 제한)
+      const maxRotation = Math.PI / 4; // 45도로 제한
       groupRef.current.rotation.x = lerp(
         groupRef.current.rotation.x,
-        mousePosition.y * 0.5,
+        mousePosition.y * maxRotation,
         0.1,
       );
       groupRef.current.rotation.z = lerp(
         groupRef.current.rotation.z,
-        -mousePosition.x * 0.5,
+        -mousePosition.x * maxRotation,
         0.1,
       );
     }
