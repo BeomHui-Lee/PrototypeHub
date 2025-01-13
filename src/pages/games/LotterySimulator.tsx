@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import ParticipantManager from '../../components/LotterySimulator/ParticipantManager';
 import {
   ButtonProps,
@@ -125,7 +124,6 @@ const ParticipantCard: React.FC<ParticipantCardProps> = ({
 );
 
 const LotterySimulator: React.FC = () => {
-  const navigate = useNavigate();
   const [participants, setParticipants] =
     useState<Participant[]>(initialParticipants);
   const [winners, setWinners] = useState<Participant[]>([]);
