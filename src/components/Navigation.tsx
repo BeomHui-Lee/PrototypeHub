@@ -24,7 +24,7 @@ const Navigation = () => {
         return '플레이그라운드';
       case '/lab':
         return '실험실';
-      case '/experience':
+      case '/career':
         return '경력';
       case '/about':
         return '소개';
@@ -57,10 +57,10 @@ const Navigation = () => {
       engText: 'Lab',
     },
     {
-      path: '/experience',
+      path: '/career',
       icon: <Briefcase size={20} />,
       text: '경력',
-      engText: 'Experience',
+      engText: 'Career',
     },
     {
       path: '/about',
