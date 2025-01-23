@@ -4,10 +4,11 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import LotterySimulator from './pages/games/LotterySimulator';
 import Playground from './pages/Playground.tsx';
+import CareerPage from './pages/Career.tsx';
+import AboutPage from './pages/About.tsx';
+import AgricolaScoreCalculator from './pages/games/AgricolaScoreCalculator.tsx';
 
 const Lab = () => <div className="min-h-screen pt-20">실험실 페이지</div>;
-const Experience = () => <div className="min-h-screen pt-20">경력 페이지</div>;
-const About = () => <div className="min-h-screen pt-20">소개 페이지</div>;
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/playground" element={<Playground />} />
         <Route path="/lab" element={<Lab />} />
-        <Route path="/experience" element={<Experience />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/career" element={<CareerPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/lottery" element={<LotterySimulator />} />
+        <Route path="/agricola" element={<AgricolaScoreCalculator />} />
       </Routes>
       <Footer />
     </Router>
