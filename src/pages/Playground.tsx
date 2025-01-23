@@ -20,11 +20,22 @@ const playground: Project[] = [
     title: '추첨 시뮬레이터',
     description:
       '실시간 추첨 시뮬레이션 시스템입니다. 공정하고 투명한 추첨 과정을 시각화하여 제공합니다.',
-    thumbnail: '/api/placeholder/800/600',
+    thumbnail: '/images/thumbnail/LotterySimulatorThumbnail.webp',
     tags: ['React', 'TypeScript', 'Tailwind CSS'],
     date: '2024.01',
     category: 'web',
     link: '/lottery',
+  },
+  {
+    id: 'agricola',
+    title: '아그리콜라 점수 계산기',
+    description:
+      '아그리콜라 게임의 점수를 계산하는 도구입니다. 게임 진행 중 점수를 실시간으로 확인할 수 있습니다.',
+    thumbnail: '/images/thumbnail/AgricolaScoreCalculatorThumbnail.webp',
+    tags: ['React', 'TypeScript', 'Tailwind CSS'],
+    date: '2024.01',
+    category: 'web',
+    link: '/agricola',
   },
   // 추가 프로젝트들...
 ];

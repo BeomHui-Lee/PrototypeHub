@@ -6,6 +6,7 @@ import LotterySimulator from './pages/games/LotterySimulator';
 import Playground from './pages/Playground.tsx';
 import CareerPage from './pages/Career.tsx';
 import AboutPage from './pages/About.tsx';
+import AgricolaScoreCalculator from './pages/games/AgricolaScoreCalculator.tsx';
 
 const Lab = () => <div className="min-h-screen pt-20">실험실 페이지</div>;
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/career" element={<CareerPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/lottery" element={<LotterySimulator />} />
+        <Route path="/agricola" element={<AgricolaScoreCalculator />} />
       </Routes>
       <Footer />
     </Router>

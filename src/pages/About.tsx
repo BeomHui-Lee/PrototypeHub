@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { ParticleSystem } from '../components/ParticleSystem.tsx';
 import { FloatingText } from '../components/FloatingText.tsx';
+import CodeEditorScene from '../components/CodeEditorScene.tsx';
 
 // AI DNA 더블 헬릭스 컴포넌트
 const AIDNAHelix = () => {
@@ -244,14 +245,14 @@ const AboutPage = () => {
 
   return (
     <div ref={containerRef} className="min-h-screen pt-24 relative">
-      {/* Hero Section with 3D DNA */}
+      {/* Hero Section with 3D Code Editor */}
       <div className="relative h-[calc(100vh-6rem)] overflow-hidden">
         <motion.div
           style={{ y, opacity }}
           className="absolute inset-0 w-full h-full"
         >
           <div className="w-full h-full">
-            <Scene />
+            <CodeEditorScene />
           </div>
         </motion.div>
 
