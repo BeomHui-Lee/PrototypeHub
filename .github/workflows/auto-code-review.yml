@@ -23,6 +23,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install OpenAI package
+        run: npm install openai
+
       - name: Get changes for review
         id: get-changes
         run: |
@@ -45,7 +48,7 @@ jobs:
           DIFF: ${{ env.DIFF }}
         with:
           script: |
-            const OpenAI = require('openai');
+            const { OpenAI } = require('openai');
             
             const openai = new OpenAI({
               apiKey: process.env.OPENAI_API_KEY
@@ -61,34 +64,39 @@ jobs:
             3. 구체적인 개선 제안 포함
             4. 친근하고 건설적인 톤 유지`;
             
-            const completion = await openai.chat.completions.create({
-              model: "gpt-4o-mini",
-              messages: [
-                {
-                  role: "system",
-                  content: "당신은 15년차 시니어 개발자입니다. 코드 리뷰를 친근하고 건설적인 톤으로 작성해주세요."
-                },
-                {
-                  role: "user",
-                  content: prompt
-                }
-              ],
-              max_tokens: 1000,
-            });
+            try {
+              const completion = await openai.chat.completions.create({
+                model: "gpt-4o-mini",
+                messages: [
+                  {
+                    role: "system",
+                    content: "당신은 15년차 시니어 개발자입니다. 코드 리뷰를 친근하고 건설적인 톤으로 작성해주세요."
+                  },
+                  {
+                    role: "user",
+                    content: prompt
+                  }
+                ],
+                max_tokens: 1000,
+              });
             
-            const review = completion.choices[0].message.content;
+              const review = completion.choices[0].message.content;
             
-            // Add review comment to PR
-            const reviewComment = `## 🤖 AI 코드 리뷰
+              // Add review comment to PR
+              const reviewComment = `## 🤖 AI 코드 리뷰
 
-            ${review}
+              ${review}
             
-            ---
-            이 리뷰는 GPT-4o-mini에 의해 자동으로 생성되었습니다.`;
+              ---
+              이 리뷰는 GPT-4o-mini에 의해 자동으로 생성되었습니다.`;
             
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: reviewComment
-            });
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: reviewComment
+              });
+            } catch (error) {
+              console.error('Error generating review:', error);
+              throw error;
+            }
