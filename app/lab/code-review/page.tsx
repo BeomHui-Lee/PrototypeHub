@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import CodeReviewHistory from '@/components/CodeReviewHistory';
+import CodeReviewHistory from '@/private/components/CodeReviewHistory';
 
 const CodeReviewPage = () => {
   return (
