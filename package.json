@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "echo \"$GITMODULES\" > .gitmodules && git submodule update --init --recursive && next build",
+    "build:local": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@octokit/rest": "^21.1.0",
     "framer-motion": "^11.17.0",
     "lodash-es": "^4.17.21",
     "next": "14.2.23",
