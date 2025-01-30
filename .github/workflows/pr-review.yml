@@ -10,17 +10,26 @@ permissions:
   pull-requests: write
 
 jobs:
-  prepare-diff:
+  review:
     runs-on: ubuntu-latest
-    outputs:
-      diff: ${{ steps.get_changes.outputs.diff }}
 
     steps:
-      - name: Check out Main repo
+      - name: Check out repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          submodules: 'true'
           token: ${{ secrets.WORKFLOW_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd private
+          npm install openai
 
       - name: Get changes for review
         id: get_changes
@@ -29,11 +38,32 @@ jobs:
           echo "diff=$DIFF" >> $GITHUB_OUTPUT
         shell: bash
 
-  call-private-workflow:
-    needs: prepare-diff
-    uses: BeomHui-Lee/prototypehub-private/.github/workflows/review_logic.yml@main
-    with:
-      diff: ${{ needs.prepare-diff.outputs.diff }}
-      pr_number: ${{ github.event.pull_request.number }}
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - name: Generate Review
+        uses: actions/github-script@v7
+        env:
+          DIFF: ${{ steps.get_changes.outputs.diff }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        with:
+          script: |
+            const { generateReview } = require('./private/scripts/review.js');
+            
+            try {
+              const review = await generateReview(process.env.DIFF, process.env.OPENAI_API_KEY);
+            
+              const reviewComment = `## 🤖 AI 코드 리뷰
+
+              ${review}
+            
+              ---
+              이 리뷰는 GPT-4o-mini에 의해 자동으로 생성되었습니다.`;
+            
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: reviewComment
+              });
+            } catch (error) {
+              console.error('Error generating review:', error);
+              throw error;
+            }
