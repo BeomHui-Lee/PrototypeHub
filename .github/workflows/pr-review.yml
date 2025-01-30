@@ -10,11 +10,13 @@ permissions:
   pull-requests: write
 
 jobs:
-  call-private-workflow:
+  prepare-diff:
     runs-on: ubuntu-latest
+    outputs:
+      diff: ${{ steps.get_changes.outputs.diff }}
 
     steps:
-      - name: Check out A repo
+      - name: Check out Main repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -26,10 +28,11 @@ jobs:
           echo "diff=$DIFF" >> $GITHUB_OUTPUT
         shell: bash
 
-      - name: Use B repo's workflow (Reusabe Workflow)
-        uses: BeomHui-Lee/prototypehub-private/.github/workflows/review_logic.yml@main
-        with:
-          diff: ${{ steps.get_changes.outputs.diff }}
-          pr_number: ${{ github.event.pull_request.number }}
-        secrets:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  call-private-workflow:
+    needs: prepare-diff
+    uses: BeomHui-Lee/prototypehub-private/.github/workflows/review_logic.yml@main
+    with:
+      diff: ${{ needs.prepare-diff.outputs.diff }}
+      pr_number: ${{ github.event.pull_request.number }}
+    secrets:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
