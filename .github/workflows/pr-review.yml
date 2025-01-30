@@ -1,0 +1,25 @@
+name: PR Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - main
+
+jobs:
+  call-private-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Call Private Review Workflow
+        uses: BeomHui-Lee/prototypehub-private/.github/workflows/review_logic.yml@main
+        with:
+          pr_number: ${{ github.event.pull_request.number }}
+          pr_sha: ${{ github.event.pull_request.head.sha }}
+          base_sha: ${{ github.event.pull_request.base.sha }}
+        secrets:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
