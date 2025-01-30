@@ -2,24 +2,34 @@ name: PR Code Review
 
 on:
   pull_request:
-    types: [opened, synchronize]
-    branches:
-      - main
+    branches: [ "main" ]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
-  call-private-review:
+  call-private-workflow:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out A repo
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Call Private Review Workflow
+      - name: Get changes for review
+        id: get_changes
+        run: |
+          DIFF=$(git diff ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
+          echo "diff=$DIFF" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Use B repo's workflow (Reusabe Workflow)
         uses: BeomHui-Lee/prototypehub-private/.github/workflows/review_logic.yml@main
         with:
+          diff: ${{ steps.get_changes.outputs.diff }}
           pr_number: ${{ github.event.pull_request.number }}
-          pr_sha: ${{ github.event.pull_request.head.sha }}
-          base_sha: ${{ github.event.pull_request.base.sha }}
         secrets:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
