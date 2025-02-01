@@ -10,6 +10,9 @@ const octokit = new Octokit({
 const REPO_OWNER = 'BeomHui-Lee';
 const REPO_NAME = 'prototypehub';
 
+export const dynamic = 'force-dynamic'; // 정적 캐시 비활성화
+export const revalidate = 0; // 캐시 재검증 비활성화
+
 export async function GET(): Promise<NextResponse> {
   try {
     // 1. PR 목록 가져오기
@@ -70,12 +73,26 @@ export async function GET(): Promise<NextResponse> {
       }),
     );
 
-    return NextResponse.json(prsWithReviews as CodeReviewResponse);
+    // Cache-Control 헤더를 추가하여 응답
+    return new NextResponse(
+      JSON.stringify(prsWithReviews as CodeReviewResponse),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+        },
+      },
+    );
   } catch (error) {
     console.error('Error fetching code reviews:', error);
     return NextResponse.json(
       { error: 'Failed to fetch code reviews' } as const,
-      { status: 500 },
+      {
+        status: 500,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+        },
+      },
     );
   }
 }

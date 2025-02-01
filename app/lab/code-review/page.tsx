@@ -40,7 +40,7 @@ const CodeReviewPage = () => {
             transition={{ delay: 0.1 }}
             className="text-gray-600 max-w-2xl mx-auto"
           >
-            GitHub PR에 대해 GPT-4가 자동으로 코드리뷰를 수행합니다. 코드 품질,
+            GitHub PR에 대해 GPT가 자동으로 코드리뷰를 수행합니다. 코드 품질,
             보안, 성능 관점에서 분석하고 개선점을 제안합니다.
           </motion.p>
         </div>
