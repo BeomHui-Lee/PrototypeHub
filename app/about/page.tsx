@@ -14,8 +14,8 @@ import {
   Globe,
   Sparkles,
 } from 'lucide-react';
-import { ParticleSystem } from '@/components/ParticleSystem';
-import { FloatingText } from '@/components/FloatingText';
+import { ParticleSystem } from '@/components/MainPage/ParticleSystem';
+import { FloatingText } from '@/components/MainPage/FloatingText';
 import CodeEditorScene from '@/components/CodeEditorScene';
 
 // AI DNA 더블 헬릭스 컴포넌트
