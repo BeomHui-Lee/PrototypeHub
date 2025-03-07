@@ -61,7 +61,7 @@ const SectionCard: React.FC<SectionCardProps> = ({
       <motion.div
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="group relative glass-card rounded-xl shadow-sm p-6 cursor-pointer
+        className="group min-h-[145px] relative glass-card rounded-xl shadow-sm p-6 cursor-pointer
         transform transition-all duration-300 border border-border/50 hover:shadow-md
         hover:border-primary/20 overflow-hidden"
       >

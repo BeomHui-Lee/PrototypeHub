@@ -1,6 +1,6 @@
 import Navigation from '@/components/Layouts/Navigation';
-// import { SpeedInsights } from '@vercel/speed-insights/next';
-// import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from '@/components/Layouts/ThemeProvider';
 import './globals.css';
 
@@ -28,14 +28,14 @@ export default function RootLayout({
       <body className="min-h-screen bg-gradient-to-b from-background to-background/80 antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Navigation />
           {children}
-          {/*<SpeedInsights />*/}
-          {/*<Analytics />*/}
+          <SpeedInsights />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

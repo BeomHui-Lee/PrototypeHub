@@ -61,7 +61,7 @@ jobs:
               ${review}
             
               ---
-              이 리뷰는 GPT-4o-mini에 의해 자동으로 생성되었습니다.`;
+              이 리뷰는 GPT에 의해 자동으로 생성되었습니다.`;
             
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
