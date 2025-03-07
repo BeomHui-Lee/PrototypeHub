@@ -27,12 +27,12 @@ const navItems = [
     text: '플레이그라운드',
     engText: 'Playground',
   },
-  {
-    path: '/lab',
-    icon: <FlaskConical size={20} />,
-    text: '실험실',
-    engText: 'Lab',
-  },
+  // {
+  //   path: '/lab',
+  //   icon: <FlaskConical size={20} />,
+  //   text: '실험실',
+  //   engText: 'Lab',
+  // },
   {
     path: '/career',
     icon: <Briefcase size={20} />,
