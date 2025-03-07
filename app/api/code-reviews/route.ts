@@ -4,7 +4,7 @@ import { Octokit } from '@octokit/rest';
 import type { CodeReviewResponse, PullRequest } from '@/types/review';
 
 // GitHub Personal Access Token 인증 설정
-const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 if (!GITHUB_TOKEN) {
   console.error('❌ GITHUB_TOKEN 환경 변수가 설정되지 않았습니다.');
   throw new Error('Missing GitHub Token');
